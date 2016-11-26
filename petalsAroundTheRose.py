@@ -106,5 +106,5 @@ try:
     if cont == 'exit':
       sys.exit(98)
 except EOFError:
-  print('Goodbye.')
+  print('\nGoodbye.')
   sys.exit(99)
