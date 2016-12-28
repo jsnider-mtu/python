@@ -1,3 +1,4 @@
+#!/usr/local/bin/python3
 """
 An old game whose name is significant.
 
@@ -5,6 +6,7 @@ Author: Joshua Snider
 """
 
 from optparse import OptionParser
+import os
 import random
 import sys
 import time
@@ -62,6 +64,7 @@ def throw():
       rose += petals[die]
     except KeyError:
       pass
+  os.system('cls' if os.name == 'nt' else 'clear')
   print('\n'+bone+'\t'+bone+'\t'+bone+'\t'+bone+'\t'+bone)
   print(bone1[dice[0]-1]+'\t'+bone1[dice[1]-1]+'\t'+bone1[dice[2]-1]+'\t'+\
         bone1[dice[3]-1]+'\t'+bone1[dice[4]-1])
@@ -80,12 +83,15 @@ def game():
   return rose, guess
 
 try:
+  os.system('cls' if os.name == 'nt' else 'clear')
   ins = input('Do you need instructions?')
   if len(ins) > 1:
     ins = ins[0].lower()
   if ins == 'y':
+    os.system('cls' if os.name == 'nt' else 'clear')
     print(motd)
     time.sleep(1)
+    os.system('cls' if os.name == 'nt' else 'clear')
   while wins < 6:
     rose, guess = game()
     if str(rose) == guess:
@@ -99,6 +105,8 @@ try:
         print('You have '+str(wins)+' correct so far.\n')
       if wins == 5:
         print('Just one more gets you to the heart of the mystery!\n')
+    elif bastard:
+      print("\nWrong, and I won't tell you how many there are cuz I'm a bastard! =)\n")
     else:
       print('\nWrong. There are '+str(rose)+' petals around the rose.\n')
       wins = 0
