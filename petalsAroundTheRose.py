@@ -101,12 +101,14 @@ try:
         print('\033[91;1mYou have unraveled the mystery of the Rose Petals!')
         print('Welcome to the Fellowship of the Rose!!!')
         print('(You are herewith sworn to secrecy.)\n\033[0m')
+        sys.exit(0)
       else:
         print('You have '+str(wins)+' correct so far.\n')
       if wins == 5:
         print('Just one more gets you to the heart of the mystery!\n')
-    elif bastard:
+    elif options.bastard:
       print("\nWrong, and I won't tell you how many there are cuz I'm a bastard! =)\n")
+      wins = 0
     else:
       print('\nWrong. There are '+str(rose)+' petals around the rose.\n')
       wins = 0
