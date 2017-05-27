@@ -134,8 +134,13 @@ def game():
     global scrolls
     global levels
     print("This is a test version, be calm\n")
-    print("Running level 1 for now\n")
-    level = levels[0]
+    ans = input('What level would you like to play? ')
+    while not ans.isdigit():
+        ans = input('What level would you like to play? ')
+    if int(ans) < 1 or int(ans) > 60:
+        print('Not a level')
+        sys.exit(1)
+    level = levels[int(ans) - 1]
     mapn = maps[level[0]]
     scroll = scrolls[level[1]]
     apos = level[2]
@@ -149,9 +154,13 @@ def game():
     comsav = level[6]
     # Have user decide order of tokens
     print('You have %d reds (0), %d blues (1), and %d greens (2)' % (comsav[0], comsav[1], comsav[2]))
-    print('You have no mods in level 1\n')
+    # Print mods
+    try:
+        print('You have these mods: '+str(mods))
+    except TypeError:
+        print('You have no mods')
     coms = input('Please input the order of commands (rbg123456op) (ex: grgr): ')
-    while len(coms) != 4:
+    while len(coms) != scroll[0]:
         coms = input('Please input the order of commands (rbg123456op) (ex: grgr): ')
     # begin level
     scrollp = 0
@@ -163,6 +172,46 @@ def game():
                 # Ensure conditional in this position of coms and then test
                 assert coms[scrollp] in '123456op'
                 # Conditionals should map to a function for testing
+                if coms[scrollp] == '1':
+                    if crystals == 1:
+                        scrollp = scroll[1][scrollp][0]
+                    else:
+                        scrollp = scroll[1][scrollp][1]
+                elif coms[scrollp] == '2':
+                    if crystals == 2:
+                        scrollp = scroll[1][scrollp][0]
+                    else:
+                        scrollp = scroll[1][scrollp][1]
+                elif coms[scrollp] == '3':
+                    if crystals == 3:
+                        scrollp = scroll[1][scrollp][0]
+                    else:
+                        scrollp = scroll[1][scrollp][1]
+                elif coms[scrollp] == '4':
+                    if crystals == 4:
+                        scrollp = scroll[1][scrollp][0]
+                    else:
+                        scrollp = scroll[1][scrollp][1]
+                elif coms[scrollp] == '5':
+                    if crystals == 5:
+                        scrollp = scroll[1][scrollp][0]
+                    else:
+                        scrollp = scroll[1][scrollp][1]
+                elif coms[scrollp] == '6':
+                    if crystals == 6:
+                        scrollp = scroll[1][scrollp][0]
+                    else:
+                        scrollp = scroll[1][scrollp][1]
+                elif coms[scrollp] == 'o':
+                    if mapn[apos][3] == 2:
+                        scrollp = scroll[1][scrollp][0]
+                    else:
+                        scrollp = scroll[1][scrollp][1]
+                elif coms[scrollp] == 'p':
+                    if mapn[apos][3] == 1:
+                        scrollp = scroll[1][scrollp][0]
+                    else:
+                        scrollp = scroll[1][scrollp][1]
             else:
                 # else run command and then move scrollp to new destination
                 if coms[scrollp] == 'r':
