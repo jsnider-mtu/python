@@ -129,18 +129,32 @@ levels = [[0, 0, 5, 3, None, None, {0: 2, 1: 0, 2: 2}],
             [8, 10, 0, 1, [2, 5, 7, 7, 7], [2, 'o'], {0: 1, 1: 2, 2: 1}],
             [9, 8, 8, 9, [2, 9], [2], {0: 3, 1: 2, 2: 2}]]
 
-def game():
+def move(n, mapn, apos):
+    try:
+        pos = mapn[apos][n]
+        return pos
+    except TypeError:
+        print('No path that way, you lose.\nTry again.')
+        sys.exit(1)
+
+def game(n='NaN'):
     global maps
     global scrolls
     global levels
     print("This is a test version, be calm\n")
-    ans = input('What level would you like to play? ')
-    while not ans.isdigit():
+    if not n.isdigit():
         ans = input('What level would you like to play? ')
-    if int(ans) < 1 or int(ans) > 60:
-        print('Not a level')
-        sys.exit(1)
-    level = levels[int(ans) - 1]
+        while not ans.isdigit():
+            ans = input('What level would you like to play? ')
+        if int(ans) < 1 or int(ans) > 60:
+            print('Not a level')
+            sys.exit(1)
+        level = levels[int(ans) - 1]
+    else:
+        if int(ans) < 1 or int(ans) > 60:
+            print('Not a level')
+            sys.exit(1)
+        level = levels[int(n) - 1]
     mapn = maps[level[0]]
     scroll = scrolls[level[1]]
     apos = level[2]
@@ -152,26 +166,39 @@ def game():
         crystalsc = 0
     mods = level[5]
     comsav = level[6]
-    # Have user decide order of tokens
-    print('You have %d reds (0), %d blues (1), and %d greens (2)' % (comsav[0], comsav[1], comsav[2]))
-    # Print mods
-    try:
-        print('You have these mods: '+str(mods))
-    except TypeError:
-        print('You have no mods')
+    print('You are playing on map %d with scroll %d\n' % (level[0]+1, level[1]+1))
+    print('You are starting at %d and the portal is at %d\n' % (apos, ppos))
+    print('You have %d reds, %d blues, and %d greens' % (comsav[0], comsav[1], comsav[2]))
+    print('You have these mods: '+str(mods))
+    print('There are crystals in these locations: '+str(crystalsp))
     coms = input('Please input the order of commands (rbg123456op) (ex: grgr): ')
     while len(coms) != scroll[0]:
         coms = input('Please input the order of commands (rbg123456op) (ex: grgr): ')
+    # Ensure that the input is valid given tokens in play
+    if coms.count('r') != comsav[0]:
+        print("Not a valid command sequence")
+        sys.exit(1)
+    elif coms.count('b') != comsav[1]:
+        print("Not a valid command sequence")
+        sys.exit(1)
+    elif coms.count('g') != comsav[2]:
+        print("Not a valid command sequence")
+        sys.exit(1)
+    if mods:
+        for k in mods:
+            if coms.count(str(k)) != 1:
+                print("Not a valid command sequence")
+                sys.exit(1)
     # begin level
     scrollp = 0
     crystals = 0
     while scrollp < scroll[0]:
-        # Is this position a conditional?
         if scrollp in scroll[1]:
             if isinstance(scroll[1][scrollp], tuple):
                 # Ensure conditional in this position of coms and then test
-                assert coms[scrollp] in '123456op'
-                # Conditionals should map to a function for testing
+                if coms[scrollp] not in '123456op':
+                    print('There should be a conditional at '+str(scrollp))
+                    sys.exit(1)
                 if coms[scrollp] == '1':
                     if crystals == 1:
                         scrollp = scroll[1][scrollp][0]
@@ -215,22 +242,22 @@ def game():
             else:
                 # else run command and then move scrollp to new destination
                 if coms[scrollp] == 'r':
-                    apos = mapn[apos][0]
+                    apos = move(0, mapn, apos)
                 elif coms[scrollp] == 'b':
-                    apos = mapn[apos][1]
+                    apos = move(1, mapn, apos)
                 elif coms[scrollp] == 'g':
-                    apos = mapn[apos][2]
+                    apos = move(2, mapn, apos)
                 else:
                     print("Can't use a conditional here")
                     sys.exit(1)
                 scrollp = scroll[1][scrollp]
         else:
             if coms[scrollp] == 'r':
-                apos = mapn[apos][0]
+                apos = move(0, mapn, apos)
             elif coms[scrollp] == 'b':
-                apos = mapn[apos][1]
+                apos = move(1, mapn, apos)
             elif coms[scrollp] == 'g':
-                apos = mapn[apos][2]
+                apos = move(2, mapn, apos)
             else:
                 print("Can't use a conditional here")
                 sys.exit(1)
@@ -246,4 +273,7 @@ def game():
     print('You lose, try again')
 
 if __name__ == '__main__':
-    game()
+    if len(sys.argv) == 2:
+        game(sys.argv[1])
+    else:
+        game()
