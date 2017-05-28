@@ -39,6 +39,9 @@ If so then check crystal count for win
 """
 
 import os, sys
+import readline
+
+readline.parse_and_bind('set editing-mode vim')
 
 def mapimage(n):
     if n == 0:
