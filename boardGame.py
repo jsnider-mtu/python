@@ -473,9 +473,9 @@ def game(n='NaN'):
     print('You are playing on map %d with scroll %d\n' % (level[0]+1, level[1]+1))
     mapimage(level[0])
     print('\nYou are starting at %d and the portal is at %d\n' % (apos, ppos))
-    print('You have %d reds, %d blues, and %d greens' % (comsav[0], comsav[1], comsav[2]))
-    print('You have these mods: '+str(mods))
     print('There are crystals in these locations: '+str(crystalsp))
+    print('You have these mods: '+str(mods))
+    print('You have %d reds, %d blues, and %d greens' % (comsav[0], comsav[1], comsav[2]))
     scrollimage(level[1])
     coms = input('Please input the order of tokens (rbg123456op): ')
     while len(coms) != scroll[0]:
@@ -546,58 +546,74 @@ def game(n='NaN'):
                     if crystals == 1:
                         print('I have 1 crystal!')
                         scrollp = scroll[1][scrollp][0]
+                        continue
                     else:
                         print('I do not have 1 crystal!')
                         scrollp = scroll[1][scrollp][1]
+                        continue
                 elif coms[scrollp] == '2':
                     if crystals == 2:
                         print('I have 2 crystals!')
                         scrollp = scroll[1][scrollp][0]
+                        continue
                     else:
                         print('I do not have 2 crystals!')
                         scrollp = scroll[1][scrollp][1]
+                        continue
                 elif coms[scrollp] == '3':
                     if crystals == 3:
                         print('I have 3 crystals!')
                         scrollp = scroll[1][scrollp][0]
+                        continue
                     else:
                         print('I do not have 3 crystals!')
                         scrollp = scroll[1][scrollp][1]
+                        continue
                 elif coms[scrollp] == '4':
                     if crystals == 4:
                         print('I have 4 crystals!')
                         scrollp = scroll[1][scrollp][0]
+                        continue
                     else:
                         print('I do not have 4 crystals!')
                         scrollp = scroll[1][scrollp][1]
+                        continue
                 elif coms[scrollp] == '5':
                     if crystals == 5:
                         print('I have 5 crystals!')
                         scrollp = scroll[1][scrollp][0]
+                        continue
                     else:
                         print('I do not have 5 crystals!')
                         scrollp = scroll[1][scrollp][1]
+                        continue
                 elif coms[scrollp] == '6':
                     if crystals == 6:
                         print('I have 6 crystals!')
                         scrollp = scroll[1][scrollp][0]
+                        continue
                     else:
                         print('I do not have 6 crystals!')
                         scrollp = scroll[1][scrollp][1]
+                        continue
                 elif coms[scrollp] == 'o':
                     if mapn[apos][3] == 2:
                         print('This is an orange spot!')
                         scrollp = scroll[1][scrollp][0]
+                        continue
                     else:
                         print('This is not an orange spot!')
                         scrollp = scroll[1][scrollp][1]
+                        continue
                 elif coms[scrollp] == 'p':
                     if mapn[apos][3] == 1:
                         print('This is a purple spot!')
                         scrollp = scroll[1][scrollp][0]
+                        continue
                     else:
                         print('This is not a purple spot!')
                         scrollp = scroll[1][scrollp][1]
+                        continue
             else:
                 # else run command and then move scrollp to new destination
                 if coms[scrollp] == 'r':
