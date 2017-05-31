@@ -281,7 +281,7 @@ def move(n, mapn, apos):
         return pos
     except TypeError:
         print('No path that way, you lose.\nTry again.')
-        sys.exit(1)
+        ending()
 
 def scrollimage(n):
     if n == 0:
