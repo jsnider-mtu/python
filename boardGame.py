@@ -105,6 +105,16 @@ import readline
 
 readline.parse_and_bind('set editing-mode vim')
 
+def ending():
+    ans = input('Would you like to play again? ')
+    if ans[0].lower() != 'y':
+        sys.exit(2)
+    ans = input('What level would you like to play? ')
+    while not ans.isdigit():
+        ans = input('What level would you like to play? ')
+    n = ans
+    game(n)
+
 def mapimage(n):
     if n == 0:
         print('  \033[32m__________ ')
@@ -548,46 +558,18 @@ def game(n='NaN'):
     # Ensure that the input is valid given tokens in play
     if coms.count('r') != comsav[0]:
         print("Not a valid command sequence")
-        ans = input('Would you like to play again? ')
-        if ans.lower() != 'y':
-            sys.exit(2)
-        ans = input('What level would you like to play? ')
-        while not ans.isdigit():
-            ans = input('What level would you like to play? ')
-        n = ans
-        game(n)
+        ending()
     elif coms.count('b') != comsav[1]:
         print("Not a valid command sequence")
-        ans = input('Would you like to play again? ')
-        if ans.lower() != 'y':
-            sys.exit(2)
-        ans = input('What level would you like to play? ')
-        while not ans.isdigit():
-            ans = input('What level would you like to play? ')
-        n = ans
-        game(n)
+        ending()
     elif coms.count('g') != comsav[2]:
         print("Not a valid command sequence")
-        ans = input('Would you like to play again? ')
-        if ans.lower() != 'y':
-            sys.exit(2)
-        ans = input('What level would you like to play? ')
-        while not ans.isdigit():
-            ans = input('What level would you like to play? ')
-        n = ans
-        game(n)
+        ending()
     if mods:
         for k in mods:
             if coms.count(str(k)) != 1:
                 print("Not a valid command sequence")
-                ans = input('Would you like to play again? ')
-                if ans.lower() != 'y':
-                    sys.exit(2)
-                ans = input('What level would you like to play? ')
-                while not ans.isdigit():
-                    ans = input('What level would you like to play? ')
-                n = ans
-                game(n)
+                ending()
     # begin level
     scrollp = 0
     crystals = 0
@@ -599,14 +581,7 @@ def game(n='NaN'):
                 # Ensure conditional in this position of coms and then test
                 if coms[scrollp] not in '123456op':
                     print('There should be a conditional at '+str(scrollp))
-                    ans = input('Would you like to play again? ')
-                    if ans.lower() != 'y':
-                        sys.exit(2)
-                    ans = input('What level would you like to play? ')
-                    while not ans.isdigit():
-                        ans = input('What level would you like to play? ')
-                    n = ans
-                    game(n)
+                    ending()
                 if coms[scrollp] == '1':
                     if crystals == 1:
                         print('I have 1 crystal!')
@@ -689,14 +664,7 @@ def game(n='NaN'):
                     apos = move(2, mapn, apos)
                 else:
                     print("Can't use a conditional here")
-                    ans = input('Would you like to play again? ')
-                    if ans.lower() != 'y':
-                        sys.exit(2)
-                    ans = input('What level would you like to play? ')
-                    while not ans.isdigit():
-                        ans = input('What level would you like to play? ')
-                    n = ans
-                    game(n)
+                    ending()
                 scrollp = scroll[1][scrollp]
         else:
             if coms[scrollp] == 'r':
@@ -707,14 +675,7 @@ def game(n='NaN'):
                 apos = move(2, mapn, apos)
             else:
                 print("Can't use a conditional here")
-                ans = input('Would you like to play again? ')
-                if ans.lower() != 'y':
-                    sys.exit(2)
-                ans = input('What level would you like to play? ')
-                while not ans.isdigit():
-                    ans = input('What level would you like to play? ')
-                n = ans
-                game(n)
+                ending()
             scrollp += 1
         if crystalsc != 0:
             if apos in crystalsp:
@@ -724,23 +685,9 @@ def game(n='NaN'):
     if apos == ppos:
         if crystals == crystalsc:
             print('You win the level!')
-            ans = input('Would you like to play again? ')
-            if ans.lower() != 'y':
-                sys.exit(2)
-            ans = input('What level would you like to play? ')
-            while not ans.isdigit():
-                ans = input('What level would you like to play? ')
-            n = ans
-            game(n)
+            ending()
     print('You lose, try again')
-    ans = input('Would you like to play again? ')
-    if ans.lower() != 'y':
-        sys.exit(2)
-    ans = input('What level would you like to play? ')
-    while not ans.isdigit():
-        ans = input('What level would you like to play? ')
-    n = ans
-    game(n)
+    ending()
 
 if __name__ == '__main__':
     if len(sys.argv) == 2:
