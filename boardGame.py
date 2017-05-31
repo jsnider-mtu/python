@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """
 This is a board game that uses a set of maps and a set of execution
 paths as well as command tokens and modifier tokens.
