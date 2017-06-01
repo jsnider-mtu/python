@@ -107,7 +107,7 @@ readline.parse_and_bind('set editing-mode vim')
 
 def ending():
     ans = input('Would you like to play again? ')
-    if ans[0].lower() != 'y':
+    if not ans or ans[0].lower() != 'y':
         sys.exit(2)
     ans = input('What level would you like to play? ')
     while not ans.isdigit():
