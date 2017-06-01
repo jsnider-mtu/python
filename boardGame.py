@@ -526,12 +526,12 @@ def game(n='NaN'):
             ans = input('What level would you like to play? ')
         if int(ans) < 1 or int(ans) > 60:
             print('Not a level')
-            sys.exit(1)
+            ending()
         level = levels[int(ans) - 1]
     else:
         if int(n) < 1 or int(n) > 60:
             print('Not a level')
-            sys.exit(1)
+            ending()
         level = levels[int(n) - 1]
     mapn = maps[level[0]]
     scroll = scrolls[level[1]]
