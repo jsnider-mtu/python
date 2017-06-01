@@ -584,56 +584,56 @@ def game(n='NaN'):
                     ending()
                 if coms[scrollp] == '1':
                     if crystals == 1:
-                        print('I have 1 crystal!')
+                        print('You have 1 crystal!')
                         scrollp = scroll[1][scrollp][0]
                         continue
                     else:
-                        print('I do not have 1 crystal!')
+                        print('You do not have 1 crystal!')
                         scrollp = scroll[1][scrollp][1]
                         continue
                 elif coms[scrollp] == '2':
                     if crystals == 2:
-                        print('I have 2 crystals!')
+                        print('You have 2 crystals!')
                         scrollp = scroll[1][scrollp][0]
                         continue
                     else:
-                        print('I do not have 2 crystals!')
+                        print('You do not have 2 crystals!')
                         scrollp = scroll[1][scrollp][1]
                         continue
                 elif coms[scrollp] == '3':
                     if crystals == 3:
-                        print('I have 3 crystals!')
+                        print('You have 3 crystals!')
                         scrollp = scroll[1][scrollp][0]
                         continue
                     else:
-                        print('I do not have 3 crystals!')
+                        print('You do not have 3 crystals!')
                         scrollp = scroll[1][scrollp][1]
                         continue
                 elif coms[scrollp] == '4':
                     if crystals == 4:
-                        print('I have 4 crystals!')
+                        print('You have 4 crystals!')
                         scrollp = scroll[1][scrollp][0]
                         continue
                     else:
-                        print('I do not have 4 crystals!')
+                        print('You do not have 4 crystals!')
                         scrollp = scroll[1][scrollp][1]
                         continue
                 elif coms[scrollp] == '5':
                     if crystals == 5:
-                        print('I have 5 crystals!')
+                        print('You have 5 crystals!')
                         scrollp = scroll[1][scrollp][0]
                         continue
                     else:
-                        print('I do not have 5 crystals!')
+                        print('You do not have 5 crystals!')
                         scrollp = scroll[1][scrollp][1]
                         continue
                 elif coms[scrollp] == '6':
                     if crystals == 6:
-                        print('I have 6 crystals!')
+                        print('You have 6 crystals!')
                         scrollp = scroll[1][scrollp][0]
                         continue
                     else:
-                        print('I do not have 6 crystals!')
+                        print('You do not have 6 crystals!')
                         scrollp = scroll[1][scrollp][1]
                         continue
                 elif coms[scrollp] == 'o':
@@ -679,7 +679,7 @@ def game(n='NaN'):
             scrollp += 1
         if crystalsc != 0:
             if apos in crystalsp:
-                print('I picked up a crystal!')
+                print('You picked up a crystal!')
                 crystals += 1
                 crystalsp.remove(apos)
     if apos == ppos:
